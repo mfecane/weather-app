@@ -1,4 +1,13 @@
 .spinner {
   margin: 30px;
+  color: #ccc;
+}
+
+.current-weather__container .spinner {
+  color: #fff;
+}
+
+.forecast__container .spinner {
+  color: #ccc;
 }
 /*# sourceMappingURL=Spinner.css.map */

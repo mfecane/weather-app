@@ -43,7 +43,7 @@ export default class WeatherService {
             this._incrementApiCallCount();
             ls.set('forecastWeatherCache', forecast, dayMs); // cache for a day
         }
-        await sleep(2000);
+        await sleep(1500);
         console.log('Forecast dump', forecast);
         return this._transformForecastWeather(forecast);
     };

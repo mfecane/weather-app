@@ -16,6 +16,9 @@
   background-color: #ffa131;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  background: linear-gradient(-45deg, #ffad31 0%, #ff731c 100%);
 }
 
 .current-weather__date {

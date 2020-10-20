@@ -12,6 +12,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
 }
 
 .forecast__container img {
@@ -39,6 +41,8 @@
   -webkit-box-pack: stretch;
       -ms-flex-pack: stretch;
           justify-content: stretch;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
 }
 
 .forecast-item__container {

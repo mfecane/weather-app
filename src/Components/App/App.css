@@ -17,5 +17,7 @@
   background-color: #fff;
   -webkit-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 /*# sourceMappingURL=App.css.map */

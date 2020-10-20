@@ -4,6 +4,7 @@
     padding: 12px;
     align-items: center;
     justify-content: center;
+    transition: all 1s ease-out;
 
     img {
         width:40px;
@@ -21,6 +22,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: stretch;
+        transition: all 1s ease-out;
     }
 
     &__container {
