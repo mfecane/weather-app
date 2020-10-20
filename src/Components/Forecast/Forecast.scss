@@ -1,0 +1,48 @@
+.forecast__container{
+    flex: 1 1 auto;
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width:40px;
+        height:40px
+    }
+}
+
+.forecast-item {
+    color: #ccc;
+
+    &__container{
+        width: 100px;
+        min-width: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: stretch;
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__date {
+        font-size: 14px;
+        font-weight: normal;
+        color: #ccc;
+        margin:2px;
+    }
+
+    &__temp {
+        font-size: 18px;
+        font-weight: 400;
+        font-family: Lato, Arial, Helvetica, sans-serif;
+        color: #ccc;
+        &:after {
+            content: "\00B0";
+        }
+    }
+
+}
