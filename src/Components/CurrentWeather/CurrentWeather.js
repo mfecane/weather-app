@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import WeatherService from '../../Services/OWMService';
+import Header from '../Header';
 import Spinner from '../Spinner';
 import './CurrentWeather.scss';
+import { Link } from 'react-router-dom';
 
 export default class CurrentWeather extends Component {
 
@@ -51,18 +53,23 @@ export default class CurrentWeather extends Component {
     formatDate(date) {
         const d = new Date(date * 1000);
         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        return weekday[d.getDay()] + ", " + ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
+        return (weekday[d.getDay()] + ", " + ("0" + d.getDate()).slice(-2)
+            + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear());
     }
 
     render() {
+        const { city, selectTheme } = this.props;
+
         const {
             weather:
             {
-                date, name, temp, desc, icon, high, low, wind, humidity
+                date, name, temp, desc, icon, high,
+                low, wind, humidity
             },
             error,
             loading
         } = this.state;
+
 
         const hasData = !(loading || error);
 
@@ -74,12 +81,7 @@ export default class CurrentWeather extends Component {
         ) : null;
         const content = hasData ? (
             <>
-                <div className="current-weather__header-container">
-                    <h2 className="current-weather__date">{this.formatDate(date)}</h2>
-                    <h2 className="current-weather__city">
-                        <i className="fa fa-map-marker" />{name}
-                    </h2>
-                </div>
+                <Header city={name} date={this.formatDate(date)} />
                 <div className="current-weather__container-inner">
                     <div className="current-weather__type-container">
                         <img
@@ -102,22 +104,23 @@ export default class CurrentWeather extends Component {
                             </div>
                         </div>
                         <div className="current-weather__info-container">
-                        <div className="current-weather__info">
-                            <div className="current-weather__info-label">
-                                HUMIDITY
+                            <div className="current-weather__info">
+                                <div className="current-weather__info-label">
+                                    HUMIDITY
                                 </div>
-                            <div className="current-weather__info-value">
-                                {`${humidity}%`}
+                                <div className="current-weather__info-value">
+                                    {`${humidity}%`}
+                                </div>
+                                <div className="current-weather__info-label">
+                                    WIND
+                                </div>
+                                <div className="current-weather__info-value">
+                                    {`${wind}`}m/s
+                                </div>
                             </div>
-                            <div className="current-weather__info-label">
-                                WIND
-                                </div>
-                            <div className="current-weather__info-value">
-                                {`${wind}`}m/s
-                                </div>
-                        </div>
                         </div>
                     </div>
+                    <Link to="/details" className="khbtn current-weather__more-button">More details</Link>
                 </div>
             </>
         ) : null;

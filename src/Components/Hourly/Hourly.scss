@@ -31,7 +31,6 @@
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    background-color: #ff564a;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -53,6 +52,17 @@
     }
 }
 
+.hourly__element.hot {
+    background-color: #F38200   ;
+}
+
+.hourly__element.warm {
+    background-color: #03b50c   ;
+}
+
+.hourly__element.cold {
+    background-color: #0a86c7   ;
+}
 
 .hourly__rain {
     display: flex;

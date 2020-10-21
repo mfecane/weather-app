@@ -60,6 +60,7 @@ export default class Hourly extends Component {
 
     render() {
         const { data, loading, error } = this.state;
+        const {theme} = this.props;
 
         let min = 0, max = 0;
         data.forEach((el) => {
@@ -76,7 +77,8 @@ export default class Hourly extends Component {
                     temp={temp}
                     time={dateValue}
                     rainChance={rainChance}
-                    height={height} />
+                    height={height} 
+                    theme={theme}/>
             );
         });
 
@@ -104,7 +106,7 @@ export default class Hourly extends Component {
     }
 };
 
-const Element = ({ temp, time, height, rainChance }) => {
+const Element = ({ temp, time, height, rainChance, theme }) => {
     const style = {
         height: `${height}px`
     };
@@ -120,7 +122,7 @@ const Element = ({ temp, time, height, rainChance }) => {
 
     return (
         <div className="hourly__element-container">
-            <div className="hourly__element" style={style}>
+            <div className={`hourly__element ${theme}`} style={style}>
                 <div className="hourly__element-tempgroup">
                     <div className="hourly__temp">{temp}</div>
                     {rain}

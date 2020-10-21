@@ -27,3 +27,29 @@ h1, h2, h3, h4, h5 {
     background-color: #5F6C93;
     padding: 20px;
 }
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.khbtn {
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid white;
+    color:white;
+    outline: none;
+    vertical-align: middle;
+    padding: 2px 16px;
+    transition: all 0.3s ease-out;
+    font-weight: 400;
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    &:hover {
+        background-color: #ffce80;
+        color: black;
+        transition: all 0.3s ease-out;
+    }
+}

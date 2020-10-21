@@ -1,0 +1,22 @@
+.cities{
+    &__container {
+        padding:20px;
+    }
+    &__grid {
+        display: grid;
+        grid-template-columns: auto 40px;
+    }
+    &__name {
+        font-size: 30px;
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+        font-weight: 300;
+    }
+    &__temp {
+        font-size: 30px;
+        font-family: Lato, Arial, Helvetica, sans-serif;
+        font-weight: 300;
+        &:after{
+            content: "\00B0";
+        }
+    }
+}
