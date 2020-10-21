@@ -45,10 +45,15 @@ export default class OWMService {
             main: {
                 temp,
                 temp_max,
-                temp_min
+                temp_min,
+                humidity
             },
-            weather
+            weather,
+            wind:{
+                speed
+            }
         } = weatherData;
+
         const { main, icon } = weather[0];
         return {
             name: name,
@@ -57,7 +62,9 @@ export default class OWMService {
             desc: main,
             icon: icon,
             high: Math.round(temp_max),
-            low: Math.round(temp_min)
+            low: Math.round(temp_min),
+            wind: speed,
+            humidity: humidity
         };
     };
 

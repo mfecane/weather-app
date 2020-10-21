@@ -24,7 +24,7 @@
 }
 
 .hourly__element {
-    width: 40px;
+    width: 50px;
     padding: 2px;
     display: flex;
     flex-direction: column;
@@ -36,14 +36,14 @@
     border-top-right-radius: 5px;
 
     .hourly__time {
-        font-size: 12px;
+        font-size: 16px;
         font-weight: 400;
         font-family: Lato, Arial, Helvetica, sans-serif;
     }
     .hourly__temp {
         position: relative;
         left: 2px;
-        font-size: 18px;
+        font-size: 22px;
         font-weight: 400;
         margin: 0px 0px 6px 0px;
         font-family: Lato, Arial, Helvetica, sans-serif;
@@ -59,17 +59,17 @@
 
     img {
         position: relative;
-        left:3px;
-        width: 30px;
-        height: 30px;
+        left:2px;
+        width: 36px;
+        height: 36px;
     }
 
     &-percent {
         position: relative;
-        left:-8px;
+        left:-9px;
         top:-4px;
         font-weight: 400;
-        font-size: 10px;
+        font-size: 14px;
         font-family: Lato, Arial, Helvetica, sans-serif;
     }
 }

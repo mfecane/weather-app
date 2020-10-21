@@ -55,7 +55,14 @@ export default class CurrentWeather extends Component {
     }
 
     render() {
-        const { weather: { date, name, temp, desc, icon, high, low }, error, loading } = this.state;
+        const {
+            weather:
+            {
+                date, name, temp, desc, icon, high, low, wind, humidity
+            },
+            error,
+            loading
+        } = this.state;
 
         const hasData = !(loading || error);
 
@@ -67,35 +74,51 @@ export default class CurrentWeather extends Component {
         ) : null;
         const content = hasData ? (
             <>
-            <div className="current-weather__header-container">
-                <h2 className="current-weather__date">{this.formatDate(date)}</h2>
-                <h2 className="current-weather__city">
-                    <i className="fa fa-map-marker" />{name}
-                </h2>
-            </div>
-            <div className="current-weather__container-inner">
-                <div className="current-weather__type-container">
-                    <img 
-                    className="current-weather__type-img"
-                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
-                    <h3 className="current-weather__type-desc">{desc}</h3>
+                <div className="current-weather__header-container">
+                    <h2 className="current-weather__date">{this.formatDate(date)}</h2>
+                    <h2 className="current-weather__city">
+                        <i className="fa fa-map-marker" />{name}
+                    </h2>
                 </div>
-                <div className="current-weather__temp-container">
-                    <h1 className="current-weather__temp">
-                        {temp}
-                    </h1>
-                    <div className="current-weather__hilo-container">
-                        <div className="current-weather__hilo-element">
-                            <i className="current-weather__hilo-icon fa fa-chevron-up" />
-                            <span className="current-weather__hilo-temp">{high}</span>
+                <div className="current-weather__container-inner">
+                    <div className="current-weather__type-container">
+                        <img
+                            className="current-weather__type-img"
+                            src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
+                        <h3 className="current-weather__type-desc">{desc}</h3>
+                    </div>
+                    <div className="current-weather__temp-container">
+                        <h1 className="current-weather__temp">
+                            {temp}
+                        </h1>
+                        <div className="current-weather__hilo-container">
+                            <div className="current-weather__hilo-element">
+                                <i className="current-weather__hilo-icon fa fa-chevron-up" />
+                                <span className="current-weather__hilo-temp">{high}</span>
+                            </div>
+                            <div className="current-weather__hilo-element">
+                                <i className="current-weather__hilo-icon fa fa-chevron-down" />
+                                <span className="current-weather__hilo-temp">{low}</span>
+                            </div>
                         </div>
-                        <div className="current-weather__hilo-element">
-                            <i className="current-weather__hilo-icon fa fa-chevron-down" />
-                            <span className="current-weather__hilo-temp">{low}</span>
+                        <div className="current-weather__info-container">
+                        <div className="current-weather__info">
+                            <div className="current-weather__info-label">
+                                HUMIDITY
+                                </div>
+                            <div className="current-weather__info-value">
+                                {`${humidity}%`}
+                            </div>
+                            <div className="current-weather__info-label">
+                                WIND
+                                </div>
+                            <div className="current-weather__info-value">
+                                {`${wind}`}m/s
+                                </div>
+                        </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </>
         ) : null;
 

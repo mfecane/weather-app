@@ -76,7 +76,7 @@ export default class Forecast extends Component {
         const content = hasData ? <React.Fragment>
             {forecast.map(({ date, temp, icon }, index) => {
                 let { weekday, day } = this.formatDate(date);
-                weekday = (index == 0) ? 'Today' : weekday;
+                weekday = (index === 0) ? 'Today' : weekday;
                 return <Element key={date} weekday={weekday} day={day} temp={temp} icon={icon} />;
             })}
         </React.Fragment> : null;
@@ -92,8 +92,6 @@ export default class Forecast extends Component {
 };
 
 const Element = ({ day, weekday, temp, icon }) => {
-
-
 
     return <div className="forecast-item__container">
         <div className="forecast-item__date">

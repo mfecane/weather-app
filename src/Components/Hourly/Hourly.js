@@ -68,7 +68,7 @@ export default class Hourly extends Component {
         });
 
         const elements = data.map(({ temp, date, rainChance }, index) => {
-            let height = map(temp, min, max, 85, 150);
+            let height = map(temp, min, max, 100, 180);
             const dateValue = (index === 0) ? 'Now' : this.formatDate(date);
             return (
                 <Element
@@ -109,10 +109,10 @@ const Element = ({ temp, time, height, rainChance }) => {
         height: `${height}px`
     };
     let rain = '';
-    if (rainChance != 0) {
+    if (Number(rainChance) !== 0) {
         rain = (
             <div className="hourly__rain">
-                <img src={`http://openweathermap.org/img/wn/10d@2x.png`} />
+                <img src={`http://openweathermap.org/img/wn/10d@2x.png`} alt=""/>
                 <span className="hourly__rain-percent">{`${rainChance}%`}</span>
             </div>
         );
