@@ -74,8 +74,9 @@ export default class Forecast extends Component {
         const errorMessage = error ? <div>{'error'}</div> : null;
         const spinner = loading ? <Spinner /> : null;
         const content = hasData ? <React.Fragment>
-            {forecast.map(({ date, temp, icon }) => {
-                const { weekday, day } = this.formatDate(date);
+            {forecast.map(({ date, temp, icon }, index) => {
+                let { weekday, day } = this.formatDate(date);
+                weekday = (index == 0) ? 'Today' : weekday;
                 return <Element key={date} weekday={weekday} day={day} temp={temp} icon={icon} />;
             })}
         </React.Fragment> : null;

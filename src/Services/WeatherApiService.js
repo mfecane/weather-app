@@ -77,7 +77,7 @@ export default class WeatherApiService {
     _transformHourlytWeather = ({ forecast: { forecastday }, current: { last_updated_epoch } }) => {
         const arr = [];
         forecastday.forEach(({ hour }) => {
-            hour.forEach(({ time_epoch,time, temp_c }) => {
+            hour.forEach(({ time_epoch,time, temp_c, chance_of_rain }) => {
                 if (arr.length >= 24) {
                     return;
                 }
@@ -86,7 +86,8 @@ export default class WeatherApiService {
                         {
                             date: time_epoch,
                             time: time,
-                            temp: Math.round(temp_c)
+                            temp: Math.round(temp_c),
+                            rainChance: chance_of_rain
                         }
                     );
                 }

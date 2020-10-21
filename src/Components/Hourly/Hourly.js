@@ -67,14 +67,15 @@ export default class Hourly extends Component {
             max = el.temp > max ? el.temp : max;
         });
 
-        const elements = data.map(({ temp, date }, index) => {
-            let height = map(temp, min, max, 70, 120);
+        const elements = data.map(({ temp, date, rainChance }, index) => {
+            let height = map(temp, min, max, 85, 150);
             const dateValue = (index === 0) ? 'Now' : this.formatDate(date);
             return (
                 <Element
                     key={date}
                     temp={temp}
                     time={dateValue}
+                    rainChance={rainChance}
                     height={height} />
             );
         });
@@ -103,14 +104,27 @@ export default class Hourly extends Component {
     }
 };
 
-const Element = ({ temp, time, height }) => {
+const Element = ({ temp, time, height, rainChance }) => {
     const style = {
         height: `${height}px`
     };
+    let rain = '';
+    if (rainChance != 0) {
+        rain = (
+            <div className="hourly__rain">
+                <img src={`http://openweathermap.org/img/wn/10d@2x.png`} />
+                <span className="hourly__rain-percent">{`${rainChance}%`}</span>
+            </div>
+        );
+    }
+
     return (
         <div className="hourly__element-container">
             <div className="hourly__element" style={style}>
-                <div className="hourly__temp">{temp}</div>
+                <div className="hourly__element-tempgroup">
+                    <div className="hourly__temp">{temp}</div>
+                    {rain}
+                </div>
                 <div className="hourly__time">{time}</div>
             </div>
         </div>
