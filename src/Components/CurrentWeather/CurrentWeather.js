@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import WeatherService from '../../Services/WeatherService';
+import WeatherService from '../../Services/OWMService';
 import Spinner from '../Spinner';
-import './CurrentWeather.css';
+import './CurrentWeather.scss';
 
 export default class CurrentWeather extends Component {
 
@@ -23,12 +23,15 @@ export default class CurrentWeather extends Component {
 
     componentDidMount() {
         this.componentUpdate();
-        //this.interval = setInterval(this.componentUpdate, 5000);
+        this.interval = setInterval(this.componentUpdate, 10 * 60 * 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     componentUpdate = () => {
         this.setState({
-            loading: true,
             error: false
         });
         this.weatherService
@@ -51,16 +54,8 @@ export default class CurrentWeather extends Component {
         return weekday[d.getDay()] + ", " + ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
     }
 
-    formatTemp(temp) {
-        if (temp > 0) {
-            return `+${temp}`;
-        } else {
-            return `${temp}`;
-        }
-    }
-
     render() {
-        const { weather: { date, name, temp, weatherTypeDesc, icon, high, low }, error, loading } = this.state;
+        const { weather: { date, name, temp, desc, icon, high, low }, error, loading } = this.state;
 
         const hasData = !(loading || error);
 
@@ -71,7 +66,7 @@ export default class CurrentWeather extends Component {
             <h2 className="current-weather__city">
                 <i className="fa fa-map-marker" />{name}
             </h2>
-            <h3 className="current-weather__desc">{weatherTypeDesc}</h3>
+            <h3 className="current-weather__desc">{desc}</h3>
             <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
             <div className="current-weather__tempgroup">
                 <h1 className="current-weather__temp">

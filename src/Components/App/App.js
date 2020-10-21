@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import CurrentWeather from '../CurrentWeather';
 import Forecast from '../Forecast';
-import './App.css';
+import Hourly from '../Hourly';
+import './App.scss';
 
 export default class App extends Component {
 
@@ -10,6 +11,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <CurrentWeather />
+        <Hourly />
         <Forecast />
       </div>
     );

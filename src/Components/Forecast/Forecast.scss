@@ -4,7 +4,13 @@
     padding: 12px;
     align-items: center;
     justify-content: center;
-    transition: all 1s ease-out;
+
+    height: 140px;
+    min-width: 300px;
+    background-color: white;
+    color: #999;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 
     img {
         width:40px;
@@ -13,7 +19,6 @@
 }
 
 .forecast-item {
-    color: #ccc;
 
     &__container{
         width: 100px;
@@ -33,7 +38,6 @@
     &__date {
         font-size: 14px;
         font-weight: normal;
-        color: #ccc;
         margin:2px;
     }
 
@@ -41,7 +45,6 @@
         font-size: 18px;
         font-weight: 400;
         font-family: Lato, Arial, Helvetica, sans-serif;
-        color: #ccc;
         &:after {
             content: "\00B0";
         }

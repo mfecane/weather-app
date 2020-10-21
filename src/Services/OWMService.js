@@ -6,46 +6,36 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export default class WeatherService {
+export default class OWMService {
 
     _apiBase = 'https://api.openweathermap.org/data/2.5/';
     _apiKey = 'ee09c403a1b18f3bc221c981d5a7cf99';
     _units = '&units=metric';
 
-    getResource = async (url) => {
-        const res = await fetch(`${this._apiBase}${url}&appid=${this._apiKey}`);
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}` +
-                `, received ${res.status}`);
+    getResource = async (param, storage) => {
+        let data = ls.get(storage);
+        if (!data || false) {
+            const res = await fetch(`${this._apiBase}${param}&appid=${this._apiKey}`);
+            if (!res.ok) {
+                throw new Error(`Could not fetch ${param}, received ${res.status}`);
+            }
+            data = await res.json();
+            this._incrementApiCallCount();
+            ls.set(storage, data, dayMs);
         }
-        return await res.json();
+        console.log(storage + '_dump', data);
+        await sleep(1000);
+        return data;
     }
 
     getCurrentWeather = async (city_name) => {
-        let weather = ls.get('currentWeatherCache');
-        if (!weather || false) {
-            // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-            weather = await this.getResource(`weather?q=${city_name}${this._units}`);
-            this._incrementApiCallCount();
-            ls.set('currentWeatherCache', weather, dayMs); // cache for a day
-        }
-        await sleep(1000);
-        console.log('Weather dump', weather);
-        return this._transformCurrentWeather(weather);
+        const data = await this.getResource(`weather?q=${city_name}${this._units}`, 'current_weather_openweathermap')
+        return this._transformCurrentWeather(data);
     };
 
-
     getForecastWeather = async (city_name) => {
-        let forecast = ls.get('forecastWeatherCache');
-        if (!forecast || false) {
-            // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-            forecast = await this.getResource(`forecast?q=${city_name}${this._units}`);
-            this._incrementApiCallCount();
-            ls.set('forecastWeatherCache', forecast, dayMs); // cache for a day
-        }
-        await sleep(1500);
-        console.log('Forecast dump', forecast);
-        return this._transformForecastWeather(forecast);
+        const data = await this.getResource(`forecast?q=${city_name}${this._units}`, 'forecast_weather_openweathermap')
+        return this._transformForecastWeather(data);
     };
 
     _transformCurrentWeather = (weatherData) => {
@@ -59,13 +49,12 @@ export default class WeatherService {
             },
             weather
         } = weatherData;
-        const { id, main, icon } = weather[0];
+        const { main, icon } = weather[0];
         return {
             name: name,
             date: dt,
             temp: Math.round(temp),
-            weatherType: id,
-            weatherTypeDesc: main,
+            desc: main,
             icon: icon,
             high: Math.round(temp_max),
             low: Math.round(temp_min)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import WeatherService from '../../Services/WeatherService';
+import WeatherService from '../../Services/OWMService';
 import Spinner from '../Spinner';
-import './Forecast.css'
+import './Forecast.scss'
 
 export default class Forecast extends Component {
 
@@ -23,12 +23,15 @@ export default class Forecast extends Component {
 
     componentDidMount() {
         this.componentUpdate();
-        //this.interval = setInterval(this.componentUpdate, 5000);
+        this.interval = setInterval(this.componentUpdate, 10 * 60 * 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     componentUpdate = () => {
         this.setState({
-            loading: true,
             error: false
         });
         this.weatherService
@@ -53,12 +56,18 @@ export default class Forecast extends Component {
             day: ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2)
         };
     }
+    
+    formatTemp(temp) {
+        if (temp > 0) {
+            return `+${temp}`;
+        } else {
+            return `${temp}`;
+        }
+    }
 
     render() {
 
         const { forecast, error, loading } = this.state;
-
-
 
         const hasData = !(loading || error);
 
@@ -86,15 +95,15 @@ const Element = ({ day, weekday, temp, icon }) => {
 
 
     return <div className="forecast-item__container">
-        <h1 className="forecast-item__date">
+        <div className="forecast-item__date">
             {weekday}
-        </h1>
-        <h1 className="forecast-item__date">
+        </div>
+        <div className="forecast-item__date">
             {day}
-        </h1>
+        </div>
         <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
-        <h1 className="forecast-item__temp">
+        <div className="forecast-item__temp">
             {temp}
-        </h1>
+        </div>
     </div>;
 }

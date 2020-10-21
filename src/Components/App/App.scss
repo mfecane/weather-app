@@ -1,15 +1,17 @@
 .app {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
-    margin: auto;
+    justify-content: center;
     min-width: 320px;
     min-height: 300px;
     max-width: 500px;
     border-radius: 20px;
-    background-color: #fff;
+    background: linear-gradient(-45deg, rgba(255,173,49,1) 0%, rgba(255,115,28,1) 100%);
+
     -webkit-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
+    
     transition: all 1s ease-in-out;
 }
