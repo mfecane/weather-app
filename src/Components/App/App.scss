@@ -24,6 +24,9 @@
 
     &__bottom-container {
         flex: 1 1 auto;
+        display: flex;
+        justify-items: center;
+        align-items: stretch;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         background-color: white;

@@ -1,0 +1,38 @@
+.error__container {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    max-width: 400px;
+    max-height: 100px;
+    align-items: center;
+    justify-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+}
+
+.error__icon {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    background: #740000;
+    margin: 0px 12px 0px 12px;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-image: url(/svg/lightning.svg);
+
+    :hover,
+    :focus {
+        background: #fff;
+        cursor: pointer;
+    }
+}
+
+.error__desc {
+    color: #740000;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+}

@@ -3,7 +3,7 @@
     display: flex;
     padding: 12px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 
     height: 140px;
     color: #999;
@@ -17,7 +17,7 @@
 .forecast-item {
 
     &__container{
-        width: 100px;
+        width: 90px;
         min-width: 50px;
         display: flex;
         flex-direction: column;

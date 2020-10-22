@@ -23,13 +23,13 @@ export default class OWMService {
             this._incrementApiCallCount();
             ls.set(storage, data, dayMs);
         }
-        console.log(storage + '_dump', data);
+        //console.log(storage + '_dump', data);
         await sleep(1000);
         return data;
     }
 
-    getCurrentWeather = async (city_name) => {
-        const data = await this.getResource(`weather?q=${city_name}${this._units}`, 'current_weather_openweathermap')
+    getCurrentWeather = async ({city}) => {
+        const data = await this.getResource(`weather?q=${city}${this._units}`, 'current_weather_openweathermap')
         return this._transformCurrentWeather(data);
     };
 

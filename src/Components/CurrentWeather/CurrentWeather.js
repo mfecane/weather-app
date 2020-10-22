@@ -1,54 +1,11 @@
 import React, { Component } from 'react';
 import WeatherService from '../../Services/OWMService';
 import Header from '../Header';
-import Spinner from '../Spinner';
 import './CurrentWeather.scss';
 import { Link } from 'react-router-dom';
+import { WithData } from '../HOC'
 
-export default class CurrentWeather extends Component {
-
-    weatherService = new WeatherService();
-
-    state = {
-        weather: {},
-        error: false,
-        loading: true
-    }
-
-    onError = (err) => {
-        console.log(err);
-        this.setState({
-            error: true,
-            loading: false
-        });
-    }
-
-    componentDidMount() {
-        this.componentUpdate();
-        this.interval = setInterval(this.componentUpdate, 10 * 60 * 1000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    componentUpdate = () => {
-        this.setState({
-            error: false
-        });
-        this.weatherService
-            .getCurrentWeather("Moscow")
-            .then(this.onWeatherLoaded)
-            .catch(this.onError);
-    }
-
-    onWeatherLoaded = (weather) => {
-        this.setState({
-            weather,
-            loading: false,
-            error: false
-        });
-    }
+class CurrentWeather extends Component {
 
     formatDate(date) {
         const d = new Date(date * 1000);
@@ -58,29 +15,13 @@ export default class CurrentWeather extends Component {
     }
 
     render() {
-        const { city, selectTheme } = this.props;
-
         const {
-            weather:
-            {
-                date, name, temp, desc, icon, high,
-                low, wind, humidity
-            },
-            error,
-            loading
-        } = this.state;
+            date, name, temp, desc, icon, high,
+            low, wind, humidity
+        } = this.props.data;
 
-
-        const hasData = !(loading || error);
-
-        const errorMessage = error ? <div>{'error'}</div> : null;
-        const spinner = loading ? (
-            <div className="current-weather__spinner-container">
-                <Spinner />
-            </div>
-        ) : null;
-        const content = hasData ? (
-            <>
+        return (
+            <div className="current-weather__container">
                 <Header city={name} date={this.formatDate(date)} />
                 <div className="current-weather__container-inner">
                     <div className="current-weather__type-container">
@@ -122,15 +63,11 @@ export default class CurrentWeather extends Component {
                     </div>
                     <Link to="/details" className="khbtn current-weather__more-button">More details</Link>
                 </div>
-            </>
-        ) : null;
-
-        return (
-            <div className="current-weather__container">
-                {content}
-                {errorMessage}
-                {spinner}
             </div>
         );
     }
 };
+
+const { getCurrentWeather } = new WeatherService();
+
+export default WithData(CurrentWeather, getCurrentWeather);

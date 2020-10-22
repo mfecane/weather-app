@@ -23,7 +23,7 @@ export default class WeatherApiService {
             this._incrementApiCallCount();
             ls.set(storage, data, dayMs);
         }
-        console.log(storage + '_dump', data);
+        // console.log(storage + '_dump', data);
         await sleep(1000);
         return data;
     }
