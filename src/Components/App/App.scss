@@ -2,10 +2,9 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
     min-width: 380px;
     max-width: 580px;
-    min-height: 700px;
+    min-height: 713px;
     border-radius: 20px;
 
     -webkit-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
@@ -23,7 +22,7 @@
     }
 
     &__bottom-container {
-        flex: 1 1 auto;
+        height: 140px;
         display: flex;
         justify-items: center;
         align-items: stretch;
@@ -36,11 +35,17 @@
         flex: 1 1 auto;
         border-radius: 20px;
         background-color: white;
+        display: flex;
+        justify-items: center;
+        align-items: stretch;
     }
 
     &__full-container--grad {
         flex: 1 1 auto;
         border-radius: 20px;
+        display: flex;
+        justify-items: center;
+        align-items: stretch;
     }
 
     // Themes

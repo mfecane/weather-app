@@ -25,7 +25,7 @@ const ErrorIndicator = () => (
 
     <div className="error__container">
         <span className="error__icon" />
-        <div className="error__desc">Something went wrong</div>
+        <div className="error__desc"><h1>Error!</h1>Something went wrong...</div>
     </div>
 )
 

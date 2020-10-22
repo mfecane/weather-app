@@ -6,7 +6,7 @@
     max-height: 100px;
     align-items: center;
     justify-items: center;
-    background-color: white;
+    background-color: rgba(255,255,255,.5);
     border-radius: 20px;
     padding: 20px;
     margin: auto;
@@ -35,4 +35,10 @@
     font-size: 24px;
     font-weight: 400;
     font-family: Roboto, Arial, Helvetica, sans-serif;
+
+    h1 {
+        font-size: 32px;
+        font-weight: 400;
+        font-family: Lato, Arial, Helvetica, sans-serif;
+    }
 }

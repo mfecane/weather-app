@@ -74,9 +74,11 @@
     }
 
     &__temp-container {
+        flex: 1 1 auto;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
+        flex-wrap: nowrap;
     }
 
     &__temp {
@@ -133,7 +135,7 @@
     }
 
     &__info-container {
-        margin-left:auto;
+        flex: 1 1 auto;
     }
 
     &__info {

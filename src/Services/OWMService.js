@@ -23,19 +23,24 @@ export default class OWMService {
             this._incrementApiCallCount();
             ls.set(storage, data, dayMs);
         }
-        //console.log(storage + '_dump', data);
-        await sleep(1000);
+        console.log(storage + '_dump', data);
+        //await sleep(1000);
         return data;
     }
 
-    getCurrentWeather = async ({city}) => {
+    getCurrentWeather = async ({ city }) => {
         const data = await this.getResource(`weather?q=${city}${this._units}`, 'current_weather_openweathermap')
         return this._transformCurrentWeather(data);
     };
 
-    getForecastWeather = async (city_name) => {
-        const data = await this.getResource(`forecast?q=${city_name}${this._units}`, 'forecast_weather_openweathermap')
+    getForecastWeather = async ({ city }) => {
+        const data = await this.getResource(`forecast?q=${city}${this._units}`, 'forecast_weather_openweathermap')
         return this._transformForecastWeather(data);
+    };
+
+    getDetailWeather = async ({ city }) => {
+        const data = await this.getResource(`weather?q=${city}${this._units}`, 'detail_weather_openweathermap')
+        return this._transformDetailWeather(data);
     };
 
     _transformCurrentWeather = (weatherData) => {
@@ -49,7 +54,7 @@ export default class OWMService {
                 humidity
             },
             weather,
-            wind:{
+            wind: {
                 speed
             }
         } = weatherData;
@@ -86,21 +91,76 @@ export default class OWMService {
                 icon: icon
             };
 
-            if(days[day] !== undefined) {
+            if (days[day] !== undefined) {
                 const date2 = new Date(days[day].date * 1000);
                 const hours2 = date2.getHours();
-                if(Math.abs(hours - 12) < Math.abs(hours2 - 12)) {
-                    days[day] = newItem; 
+                if (Math.abs(hours - 12) < Math.abs(hours2 - 12)) {
+                    days[day] = newItem;
                 }
             } else {
                 days[day] = newItem;
             }
         });
-        for(const p in days) {
+        for (const p in days) {
             forecast.push(days[p]);
         }
         return forecast;
     };
+
+    _transformDetailWeather = (weatherData) => {
+        const {
+            dt,
+            name,
+            sys: {
+                sunrise,
+                sunset
+            },
+            clouds: {
+                all
+            },
+            main: {
+                temp,
+                temp_min,
+                temp_max,
+                pressure,
+                humidity,
+                feels_like
+            },
+            wind: {
+                speed,
+                deg
+            },
+            rain,
+            snow,
+            weather
+        } = weatherData;
+
+        const {
+            description,
+            icon
+        } = weather[0];
+
+        const rain1h = rain['1h'];
+
+        return {
+            date: dt,
+            city: name,
+            sunrise: sunrise,
+            sunset: sunset,
+            clouds: all,
+            weatherDesc: description,
+            weatherIcon: icon,
+            temp: Math.round(temp),
+            temp_min: Math.round(temp_min),
+            temp_max: Math.round(temp_max),
+            feels_like: Math.round(feels_like),
+            pressure: pressure,
+            humidity: humidity,
+            windSpeed: speed,
+            windDeg: deg,
+            rain1h: rain1h
+        };
+    }
 
     _incrementApiCallCount = () => {
         let count = ls.get('api-call-count');

@@ -1,13 +1,18 @@
 .spinner {
-    margin: 30px;
     color: #ccc;
 }
 
-.current-weather__container .spinner,
-.hourly__container .spinner {
+.app__top-container .spinner,
+.app__full-container--grad .spinner {
     color: #fff;
 }
 
-.forecast__container .spinner {
+.app__bottom-container .spinner {
     color: #ccc;
+}
+
+.spinner__container {
+    align-self: center;
+    justify-self: center;
+    margin: auto;
 }

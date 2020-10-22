@@ -6,13 +6,13 @@ import Hourly from '../Hourly';
 import Details from '../Details'
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.scss';
-import ErrorBoundary from '../ErrorBoundary';
+import {ErrorBoundary} from '../Error';
 
 export default class App extends Component {
 
   state = {
     city: 'Moscow',
-    theme: 'warm'
+    theme: 'cold'
   }
 
   selectCity = (city) => {
@@ -69,7 +69,7 @@ const CitiesPage = ({ theme }) => (
 const DetailsPage = ({ theme }) => (
   <div className="app">
     <div className={`app__full-container--grad ${theme}`}>
-      <Details />
+      <Details param={{city: 'Moscow'}} />
     </div>
   </div>
 )

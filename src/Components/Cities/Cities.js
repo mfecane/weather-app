@@ -24,7 +24,7 @@ export default class Cities extends Component {
         const { cities } = this.state;
 
         const elements = cities.map(({ name }) => (
-            <Element name={name} to={`/city/${name}`}/>
+            <Element key={name} name={name} to={`/city/${name}`}/>
         ));
 
         return (

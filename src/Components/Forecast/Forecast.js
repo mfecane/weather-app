@@ -69,6 +69,6 @@ const Element = ({ day, weekday, temp, icon }) => {
     </div>;
 }
 
-const { getForecastWeather } = new WeatherService;
+const { getForecastWeather } = new WeatherService();
 
 export default WithData(Forecast, getForecastWeather);
