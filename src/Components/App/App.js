@@ -5,71 +5,82 @@ import Forecast from '../Forecast';
 import Hourly from '../Hourly';
 import Details from '../Details'
 import { BrowserRouter, Route } from 'react-router-dom';
+import { ErrorBoundary } from '../Error';
+import { store } from '../../redux';
+
 import './App.scss';
-import {ErrorBoundary} from '../Error';
 
 export default class App extends Component {
 
-  state = {
-    city: 'Moscow',
-    theme: 'cold'
+  update = () => {
+    this.render();
   }
 
-  selectCity = (city) => {
-    this.setState({
-      city: city
-    });
+  shouldComponentUpdate = () => {
+    console.log('or wont');
+  }
+
+  componentDidMount = () => {
+    store.subscribe(this.update);
   }
 
   render() {
-    const { theme } = this.state;
     return (
       <ErrorBoundary>
         <BrowserRouter>
-          <Route path="/" exact render={(props) => (
-            <WeaterPage {...props} theme={theme} />
+          <Route path="/" exact render={() => (
+            <WeaterPage />
           )} />
-          <Route path="/city/:id" render={(props) => (
-            <WeaterPage {...props} theme={theme} />
+          <Route path="/city/:id" render={(props) => {
+            const { match: { params: { id } } } = props;
+            store.dispatch({ type: 'SELECT_CITY', city: id });
+            return <WeaterPage />;
+          }} />
+          <Route path="/cities" render={() => (
+            <CitiesPage />
           )} />
-          <Route path="/cities" render={(props) => (
-            <CitiesPage {...props} theme={theme} />
-          )} />
-          <Route path="/details" render={(props) => (
-            <DetailsPage {...props} theme={theme} />
-          )} />
+          <Route path="/details" render={() => {
+            return (
+              <DetailsPage />
+            );
+          }} />
         </BrowserRouter>
       </ErrorBoundary>
     );
   }
 }
 
-const WeaterPage = ({ match: { params: { id } }, theme, selectTheme }) => {
+const WeaterPage = () => {
+  const { city, theme } = store.getState();
   return (
     <div className="app">
       <div className={`app__top-container ${theme}`}>
-        <CurrentWeather param={{city: 'Moscow'}} />
-        <Hourly param={{city: 'Moscow'}} theme={theme}/>
+        <CurrentWeather param={{ city: city }} />
+        <Hourly param={{ city: city }} theme={theme} />
       </div>
       <div className="app__bottom-container">
-        <Forecast param={{city: 'Moscow'}} />
+        <Forecast param={{ city: city }} />
       </div>
     </div>
   );
 };
 
-const CitiesPage = ({ theme }) => (
-  <div className="app">
-    <div className={`app__full-container ${theme}`}>
-      <Cities />
+const CitiesPage = () => {
+  const { city, theme } = store.getState();
+  return (
+    <div className="app">
+      <div className={`app__full-container ${theme}`}>
+        <Cities />
+      </div>
     </div>
-  </div>
-)
+  );
+}
 
-const DetailsPage = ({ theme }) => (
-  <div className="app">
+const DetailsPage = () => {
+  const { city, theme } = store.getState();
+  return (<div className="app">
     <div className={`app__full-container--grad ${theme}`}>
-      <Details param={{city: 'Moscow'}} />
+      <Details param={{ city: city }} />
     </div>
-  </div>
-)
+  </div>);
+};

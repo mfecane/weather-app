@@ -1,7 +1,12 @@
 .cities{
+
     &__container {
-        padding:20px;
+        flex: 1 1 auto;
+        justify-self: stretch;
+        align-self: stretch;
+        padding: 50px;
     }
+
     &__grid {
         display: grid;
         grid-template-columns: auto 40px;
@@ -10,6 +15,12 @@
         font-size: 30px;
         font-family: Roboto, Arial, Helvetica, sans-serif;
         font-weight: 300;
+        a{
+            color: black;
+            &:hover {
+                color: #C44400;
+            }
+        }
     }
     &__temp {
         font-size: 30px;

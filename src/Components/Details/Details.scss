@@ -56,6 +56,10 @@
     }
 }
 
+.details__city-link {
+    font-weight: 400;
+}
+
 .details__city-value {
     font-weight: 300;
     font-family: Lato, Arial, Helvetica, sans-serif;
@@ -67,7 +71,7 @@
 .details__main-container {
     display: flex;
     align-self: stretch;
-    margin: 0px 60px 0px 60px;
+    margin: 0px 40px 0px 40px;
     justify-content: space-between;
     align-content: center;
 }
@@ -94,7 +98,7 @@
 }
 
 .bottom__columns {
-    margin: 0px 60px 40px 60px;
+    margin: 0px 70px 30px 70px;
     display: flex;
     justify-self: stretch;
     align-self: stretch;
@@ -124,6 +128,24 @@
     font-size: 18px;
     justify-self: end;
     align-self: end;
+    &.temp {
+        text-align: right;
+        font-size: 18px;
+        &:after {
+            content: "\00B0";
+        }
+    }
+}
+
+.details__label-temp {
+    color: #fff;
+    font-weight: 400;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    justify-self: end;
+    align-self: end;
+    text-align: right;
+    white-space: nowrap;
 }
 
 .details__value {
@@ -159,5 +181,6 @@
     color: #fff;
     font-weight: 300;
     font-family: Lato, Arial, Helvetica, sans-serif;
-    font-size: 30px;
+    font-size: 24px;
+    text-align: center;
 }

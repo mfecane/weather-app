@@ -3,7 +3,8 @@ import WeatherService from '../../Services/OWMService';
 import Header from '../Header';
 import './CurrentWeather.scss';
 import { Link } from 'react-router-dom';
-import { WithData } from '../HOC'
+import { WithData } from '../HOC';
+import { store } from '../../redux';
 
 class CurrentWeather extends Component {
 
@@ -12,6 +13,17 @@ class CurrentWeather extends Component {
         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         return (weekday[d.getDay()] + ", " + ("0" + d.getDate()).slice(-2)
             + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear());
+    }
+
+    componentDidMount() {
+        const { temp } = this.props.data;
+        if (temp > 15) {
+            store.dispatch({ type: 'SET_THEME', theme: 'hot' });
+        } else if (temp > 5) {
+            store.dispatch({ type: 'SET_THEME', theme: 'warm' });
+        } else {
+            store.dispatch({ type: 'SET_THEME', theme: 'cold' });
+        }
     }
 
     render() {

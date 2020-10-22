@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import './Cities.scss'
+import './Cities.scss';
 
 export default class Cities extends Component {
 
     state = {
         cities: [
             { name: 'Moscow', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Saint-Petersburgh', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Novosibirsk', temp: 5, weather: 'Rain', logo: 'logo' }
+            { name: 'Saint Petersburg', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Novosibirsk', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Yekaterinburg', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Nizhny Novogorod', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Kazan', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Chelyabinsk', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Omsk', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Samara', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Rostov-on-Don', temp: 5, weather: 'Rain', logo: 'logo' }
         ],
         loading: false,
         error: false
@@ -24,7 +31,7 @@ export default class Cities extends Component {
         const { cities } = this.state;
 
         const elements = cities.map(({ name }) => (
-            <Element key={name} name={name} to={`/city/${name}`}/>
+            <Element key={name} name={name} to={`/city/${name}`} callBack={()=>this.setCity(name)} />
         ));
 
         return (
@@ -38,10 +45,10 @@ export default class Cities extends Component {
     }
 }
 
-const Element = ({ name, to }) => (
+const Element = ({ name, callBack }) => (
     <React.Fragment>
         <h2 className="cities__name">
-            <Link to={to}>{name}</Link>
+            <Link to={`/city/${name}`}>{name}</Link>
         </h2>
         <div className="cities__temp">
             15

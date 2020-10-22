@@ -18,7 +18,6 @@ class Details extends Component {
         return out;
     }
 
-
     formatDate(date) {
         const d = new Date(date * 1000);
         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -47,17 +46,21 @@ class Details extends Component {
                         <div className="details__city-label">Last updated</div>
                         <div className="details__city-value">{`${this.formatTime(date)} ${this.formatDate(date)}`}</div>
                         <div className="details__city-label">Location</div>
-                        <div className="details__city-value"><i className="fa fa-map-marker" />{city}</div>
+                        <div className="details__city-value">
+                            <Link to="/cities" className="details__city-link">
+                                <i className="fa fa-map-marker" />{city}
+                            </Link>
+                        </div>
                     </div>
                     <div className="details__main-container">
                         <div className="details__temp-group">
                             <div className="details__temp">{temp}</div>
                             <div className="details__temp-details">
-                                <div className="details__label">Feels like</div>
+                                <div className="details__label-temp ">Feels like</div>
                                 <div className="details__value temp">{feels_like}</div>
-                                <div className="details__label">Min</div>
+                                <div className="details__label-temp">Min</div>
                                 <div className="details__value temp">{temp_min}</div>
-                                <div className="details__label">Max</div>
+                                <div className="details__label-temp">Max</div>
                                 <div className="details__value temp">{temp_max}</div>
                             </div>
                         </div>
@@ -77,8 +80,11 @@ class Details extends Component {
                                 <div className="details__value">{`${humidity} %`}</div>
                                 <div className="details__label">Pressure</div>
                                 <div className="details__value">{`${pressure} hPa`}</div>
-                                <div className="details__label">Amount of rain for the last hour</div>
-                                <div className="details__value">{`${rain1h} mm`}</div>
+                                {rain1h !== null ? <>
+                                    <div className="details__label">Amount of rain for the last hour</div>
+                                    <div className="details__value">{`${rain1h} mm`}</div>
+                                </> : null
+                                }
                                 <div className="details__label">Wind Direction</div>
                                 <div className="details__value">{`${this.degreesToDirection(windDeg)}`}</div>
                                 <div className="details__label">Wind speed</div>

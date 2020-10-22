@@ -24,7 +24,7 @@ export default class WeatherApiService {
             ls.set(storage, data, dayMs);
         }
         // console.log(storage + '_dump', data);
-        // await sleep(1000);
+        await sleep(500);
         return data;
     }
 
@@ -39,7 +39,7 @@ export default class WeatherApiService {
     };
 
     getHourlyWeather = async ({city}) => {
-        const data = await this.getResource(`forecast.json?key=${this._apiKey}&q=${city}&days=3`, 'hourly_weather_weatherapi')
+        const data = await this.getResource(`forecast.json?key=${this._apiKey}&q=${city}&days=3`, 'hourly_weather_weatherapi_'+city)
         return this._transformHourlytWeather(data);
     }
 

@@ -23,23 +23,23 @@ export default class OWMService {
             this._incrementApiCallCount();
             ls.set(storage, data, dayMs);
         }
-        console.log(storage + '_dump', data);
-        //await sleep(1000);
+        //console.log(storage + '_dump', data);
+        await sleep(500);
         return data;
     }
 
     getCurrentWeather = async ({ city }) => {
-        const data = await this.getResource(`weather?q=${city}${this._units}`, 'current_weather_openweathermap')
+        const data = await this.getResource(`weather?q=${city}${this._units}`, 'current_weather_openweathermap_' + city)
         return this._transformCurrentWeather(data);
     };
 
     getForecastWeather = async ({ city }) => {
-        const data = await this.getResource(`forecast?q=${city}${this._units}`, 'forecast_weather_openweathermap')
+        const data = await this.getResource(`forecast?q=${city}${this._units}`, 'forecast_weather_openweathermap' + city)
         return this._transformForecastWeather(data);
     };
 
     getDetailWeather = async ({ city }) => {
-        const data = await this.getResource(`weather?q=${city}${this._units}`, 'detail_weather_openweathermap')
+        const data = await this.getResource(`weather?q=${city}${this._units}`, 'detail_weather_openweathermap' + city)
         return this._transformDetailWeather(data);
     };
 
@@ -108,6 +108,7 @@ export default class OWMService {
     };
 
     _transformDetailWeather = (weatherData) => {
+
         const {
             dt,
             name,
@@ -131,7 +132,6 @@ export default class OWMService {
                 deg
             },
             rain,
-            snow,
             weather
         } = weatherData;
 
@@ -140,7 +140,11 @@ export default class OWMService {
             icon
         } = weather[0];
 
-        const rain1h = rain['1h'];
+        const rain1h = null;
+
+        if(rain !== undefined) {
+            const rain1h = rain['1h'];
+        }
 
         return {
             date: dt,
