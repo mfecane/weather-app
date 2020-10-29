@@ -8,7 +8,7 @@ function sleep(ms) {
 
 export default class WeatherApiService {
 
-    _apiBase = 'http://api.weatherapi.com/v1/';
+    _apiBase = 'https://api.weatherapi.com/v1/';
     _apiKey = '3ad9b2d2abb245dbb8e205619202010';
 
     getResource = async (param, storage) => {

@@ -1,5 +1,7 @@
 import { createStore } from 'redux';
 
+console.log('wtf');
+
 const reducer = (state = {
   city: 'Moscow',
   theme: 'warm'

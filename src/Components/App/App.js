@@ -27,7 +27,7 @@ export default class App extends Component {
   render() {
     return (
       <ErrorBoundary>
-        <BrowserRouter>
+        <BrowserRouter basename="/weather-app">
           <Route path="/" exact render={() => (
             <WeaterPage />
           )} />
