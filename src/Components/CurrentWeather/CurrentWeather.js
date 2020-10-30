@@ -39,7 +39,7 @@ class CurrentWeather extends Component {
                     <div className="current-weather__type-container">
                         <img
                             className="current-weather__type-img"
-                            src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
+                            src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
                         <h3 className="current-weather__type-desc">{desc}</h3>
                     </div>
                     <div className="current-weather__temp-container">

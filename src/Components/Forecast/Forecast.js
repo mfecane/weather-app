@@ -62,7 +62,7 @@ const Element = ({ day, weekday, temp, icon }) => {
         <div className="forecast-item__date">
             {day}
         </div>
-        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
+        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
         <div className="forecast-item__temp">
             {temp}
         </div>

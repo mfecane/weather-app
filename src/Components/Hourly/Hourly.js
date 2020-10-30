@@ -57,7 +57,7 @@ const Element = ({ temp, time, height, rainChance, theme }) => {
     if (Number(rainChance) !== 0) {
         rain = (
             <div className="hourly__rain">
-                <img src={`http://openweathermap.org/img/wn/10d@2x.png`} alt="" />
+                <img src={`https://openweathermap.org/img/wn/10d@2x.png`} alt="" />
                 <span className="hourly__rain-percent">{`${rainChance}%`}</span>
             </div>
         );

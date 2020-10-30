@@ -143,7 +143,7 @@ export default class OWMService {
         const rain1h = null;
 
         if(rain !== undefined) {
-            const rain1h = rain['1h'];
+            rain1h = rain['1h'];
         }
 
         return {

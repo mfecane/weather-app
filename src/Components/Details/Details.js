@@ -67,7 +67,7 @@ class Details extends Component {
                         <div className="details__weather-group">
                             <img
                                 className="details__weather-img"
-                                src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="" />
+                                src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="" />
                             <div className="details__weather-label">{`${this.capitalizeFirstLetter(weatherDesc)}`}</div>
                         </div>
                     </div>
