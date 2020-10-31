@@ -38,9 +38,14 @@ class Details extends Component {
         const { date, city, clouds, humidity, pressure, rain1h, sunrise, sunset, temp, feels_like,
             temp_max, temp_min, weatherDesc, weatherIcon, windDeg, windSpeed } = this.props.data;
 
+        let url = '/';
+        if (city) {
+            url = '/city/' + city;
+        }
+
         return (
             <div className="details__container">
-                <Link className="details__button-back" to="/"><i className="fa fa-arrow-left" /></Link>
+                <Link className="details__button-back" to={url}><i className="fa fa-arrow-left" /></Link>
                 <div className="details__column">
                     <div className="details__city">
                         <div className="details__city-label">Last updated</div>

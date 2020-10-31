@@ -4,7 +4,7 @@ import Header from '../Header';
 import './CurrentWeather.scss';
 import { Link } from 'react-router-dom';
 import { WithData } from '../HOC';
-import { store } from '../../redux';
+
 
 class CurrentWeather extends Component {
 
@@ -16,21 +16,29 @@ class CurrentWeather extends Component {
     }
 
     componentDidMount() {
-        const { temp } = this.props.data;
+        const { data: { temp }, setTheme } = this.props;
         if (temp > 15) {
-            store.dispatch({ type: 'SET_THEME', theme: 'hot' });
+            setTheme('hot');
         } else if (temp > 5) {
-            store.dispatch({ type: 'SET_THEME', theme: 'warm' });
+            setTheme('warm');
         } else {
-            store.dispatch({ type: 'SET_THEME', theme: 'cold' });
+            setTheme('cold');
         }
     }
 
     render() {
+
         const {
             date, name, temp, desc, icon, high,
             low, wind, humidity
         } = this.props.data;
+
+        const { city } = this.props.param;
+
+        let url = '/details';
+        if (city) {
+            url = '/details/' + city
+        }
 
         return (
             <div className="current-weather__container">
@@ -73,7 +81,7 @@ class CurrentWeather extends Component {
                             </div>
                         </div>
                     </div>
-                    <Link to="/details" className="khbtn current-weather__more-button">More details</Link>
+                    <Link to={url} className="khbtn current-weather__more-button">More details</Link>
                 </div>
             </div>
         );

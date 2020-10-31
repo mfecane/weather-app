@@ -140,9 +140,9 @@ export default class OWMService {
             icon
         } = weather[0];
 
-        const rain1h = null;
+        let rain1h = null;
 
-        if(rain !== undefined) {
+        if (rain !== undefined) {
             rain1h = rain['1h'];
         }
 

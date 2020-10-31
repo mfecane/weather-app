@@ -31,13 +31,12 @@ export default class Cities extends Component {
         const { cities } = this.state;
 
         const elements = cities.map(({ name }) => (
-            <Element key={name} name={name} to={`/city/${name}`} callBack={()=>this.setCity(name)} />
+            <Element key={name} name={name} to={`/city/${name}`} />
         ));
 
         return (
             <div className="cities__container">
                 <div className="cities__grid">
-                    <Element name={'Local'} to="/"/>
                     {elements}
                 </div>
             </div>
@@ -45,7 +44,7 @@ export default class Cities extends Component {
     }
 }
 
-const Element = ({ name, callBack }) => (
+const Element = ({ name }) => (
     <React.Fragment>
         <h2 className="cities__name">
             <Link to={`/city/${name}`}>{name}</Link>
