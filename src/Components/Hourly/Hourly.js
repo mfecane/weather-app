@@ -3,6 +3,7 @@ import './Hourly.scss';
 import WeatherService from '../../Services/WeatherApiService'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { WithData } from '../HOC';
+import Animated from '../HOC/Animated';
 
 function map(x, in_min, in_max, out_min, out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -78,4 +79,4 @@ const Element = ({ temp, time, height, rainChance, theme }) => {
 
 const { getHourlyWeather } = new WeatherService();
 
-export default WithData(Hourly, getHourlyWeather);
+export default Animated(WithData(Hourly, getHourlyWeather));

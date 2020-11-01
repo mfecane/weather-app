@@ -7,8 +7,6 @@
     min-height: 713px;
     border-radius: 20px;
 
-    -webkit-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.5);
 
     &__top-container {
@@ -19,6 +17,7 @@
         justify-content: space-between;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
+        transition: all 0.3s ease-out;
     }
 
     &__bottom-container {
@@ -46,22 +45,24 @@
         display: flex;
         justify-items: center;
         align-items: stretch;
+        transition: all 0.3s ease-out;
     }
-
-    // Themes
-
-    &__top-container.hot,
-    &__full-container--grad.hot {
+    .hotTheme &__top-container {
         background: linear-gradient(-45deg, rgba(255, 173, 49, 1) 0%, rgba(255, 115, 28, 1) 100%);
     }
-
-    &__top-container.cold,
-    &__full-container--grad.cold {
+    .hotTheme &__full-container--grad {
+        background: linear-gradient(-45deg, rgba(255, 173, 49, 1) 0%, rgba(255, 115, 28, 1) 100%);
+    }
+    .coldTheme &__top-container {
         background: linear-gradient(-45deg, rgba(0, 245, 255, 1) 0%, rgba(0, 147, 194, 1) 100%);
     }
-
-    &__top-container.warm,
-    &__full-container--grad.warm {
+    .coldTheme &__full-container--grad {
+        background: linear-gradient(-45deg, rgba(0, 245, 255, 1) 0%, rgba(0, 147, 194, 1) 100%);
+    }
+    .warmTheme &__top-container {
+        background: linear-gradient(-45deg, rgba(156, 255, 40, 1) 0%, rgba(0, 189, 9, 1) 100%);
+    }
+    .warmTheme &__full-container--grad {
         background: linear-gradient(-45deg, rgba(156, 255, 40, 1) 0%, rgba(0, 189, 9, 1) 100%);
     }
 }

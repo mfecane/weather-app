@@ -10,12 +10,13 @@ export default class Cities extends Component {
             { name: 'Saint Petersburg', temp: 5, weather: 'Rain', logo: 'logo' },
             { name: 'Novosibirsk', temp: 5, weather: 'Rain', logo: 'logo' },
             { name: 'Yekaterinburg', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Nizhny Novogorod', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Nizhny Novgorod', temp: 5, weather: 'Rain', logo: 'logo' },
             { name: 'Kazan', temp: 5, weather: 'Rain', logo: 'logo' },
             { name: 'Chelyabinsk', temp: 5, weather: 'Rain', logo: 'logo' },
             { name: 'Omsk', temp: 5, weather: 'Rain', logo: 'logo' },
             { name: 'Samara', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Rostov-on-Don', temp: 5, weather: 'Rain', logo: 'logo' }
+            { name: 'Rostov-on-Don', temp: 5, weather: 'Rain', logo: 'logo' },
+            { name: 'Miami', temp: 5, weather: 'Rain', logo: 'logo' }
         ],
         loading: false,
         error: false

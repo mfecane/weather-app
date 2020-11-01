@@ -4,6 +4,10 @@ import Header from '../Header';
 import './CurrentWeather.scss';
 import { Link } from 'react-router-dom';
 import { WithData } from '../HOC';
+import { connect } from 'react-redux';
+import * as actions from '../Actions'
+import { bindActionCreators } from 'redux';
+import Animated from '../HOC/Animated';
 
 
 class CurrentWeather extends Component {
@@ -90,4 +94,4 @@ class CurrentWeather extends Component {
 
 const { getCurrentWeather } = new WeatherService();
 
-export default WithData(CurrentWeather, getCurrentWeather);
+export default Animated(connect(null, actions)(WithData(CurrentWeather, getCurrentWeather)));

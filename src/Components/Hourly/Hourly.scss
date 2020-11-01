@@ -33,6 +33,15 @@
     color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    opacity: 0;
+    transform: scaleY(0.8);
+    transition: all 0.3s ease-out;
+
+    .fade-in.visible & {
+        opacity: 1;
+        transform: scaleY(1);
+        transition: all 0.3s ease-out;
+    }
 
     .hourly__time {
         font-size: 16px;
@@ -52,16 +61,16 @@
     }
 }
 
-.hourly__element.hot {
-    background-color: #F38200   ;
+.hotTheme .hourly__element {
+    background-color: #f38200;
 }
 
-.hourly__element.warm {
-    background-color: #03b50c   ;
+.warmTheme .hourly__element {
+    background-color: #03b50c;
 }
 
-.hourly__element.cold {
-    background-color: #0a86c7   ;
+.coldTheme .hourly__element {
+    background-color: #0a86c7;
 }
 
 .hourly__rain {
@@ -69,15 +78,15 @@
 
     img {
         position: relative;
-        left:2px;
+        left: 2px;
         width: 36px;
         height: 36px;
     }
 
     &-percent {
         position: relative;
-        left:-9px;
-        top:-4px;
+        left: -9px;
+        top: -4px;
         font-weight: 400;
         font-size: 14px;
         font-family: Lato, Arial, Helvetica, sans-serif;
