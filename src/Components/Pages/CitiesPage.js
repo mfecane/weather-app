@@ -1,6 +1,7 @@
 import React from 'react';
 import Cities from '../Cities';
 
+import './Pages.scss';
 
 const CitiesPage = () => {
     return (

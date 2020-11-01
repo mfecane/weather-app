@@ -23,7 +23,7 @@
     padding: 0px 0px 0px 8px;
 }
 
-.hourly__element {
+.hourly-element {
     width: 50px;
     padding: 2px;
     display: flex;
@@ -34,68 +34,68 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     opacity: 0;
-    transform: scaleY(0.8);
-    transition: all 0.3s ease-out;
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    transition: all 0.3s ease-in-out;
 
-    .fade-in.visible & {
+    ._animate._active & {
         opacity: 1;
         transform: scaleY(1);
-        transition: all 0.3s ease-out;
+        transition: all 0.3s ease-in-out;
     }
 
-    .hourly__time {
-        font-size: 16px;
-        font-weight: 400;
-        font-family: Lato, Arial, Helvetica, sans-serif;
+    .hotTheme & {
+        background-color: #f38200;
     }
-    .hourly__temp {
+
+    .warmTheme & {
+        background-color: #03b50c;
+    }
+
+    .coldTheme & {
+        background-color: #0a86c7;
+    }
+
+    &__temp {
+        flex: 0 0 22px;
         position: relative;
         left: 2px;
         font-size: 22px;
         font-weight: 400;
-        margin: 0px 0px 6px 0px;
-        font-family: Lato, Arial, Helvetica, sans-serif;
         &:after {
             content: "\00B0";
         }
     }
-}
-
-.hotTheme .hourly__element {
-    background-color: #f38200;
-}
-
-.warmTheme .hourly__element {
-    background-color: #03b50c;
-}
-
-.coldTheme .hourly__element {
-    background-color: #0a86c7;
-}
-
-.hourly__rain {
-    display: flex;
-
-    img {
+    &__rain {
+        flex: 0 1 36px;
         position: relative;
-        left: 2px;
-        width: 36px;
-        height: 36px;
+        align-self: stretch;
+        img {
+            position: absolute;
+            left: -8px;
+            width: 36px;
+            height: 36px;
+        }
+        span {
+            position: absolute;
+            left: 18px;
+            top: -2px;
+            font-weight: 400;
+            font-size: 14px;
+        }
     }
-
-    &-percent {
-        position: relative;
-        left: -9px;
-        top: -4px;
+    &__time {
+        flex: 1 1 auto;
+        font-size: 16px;
         font-weight: 400;
-        font-size: 14px;
-        font-family: Lato, Arial, Helvetica, sans-serif;
-    }
-}
+        position: relative;
+        align-self: stretch;
 
-.hourly__element-tempgroup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0px 0px 10px 0px;
+        span {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
 }

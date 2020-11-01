@@ -4,6 +4,7 @@ import WeatherService from '../../Services/OWMService';
 import { Link } from 'react-router-dom';
 
 import './Details.scss';
+import Animated from '../HOC/Animated';
 
 class Details extends Component {
 
@@ -46,7 +47,7 @@ class Details extends Component {
         return (
             <div className="details__container">
                 <Link className="details__button-back" to={url}><i className="fa fa-arrow-left" /></Link>
-                <div className="details__column">
+                <div className="details__column fade-in">
                     <div className="details__city">
                         <div className="details__city-label">Last updated</div>
                         <div className="details__city-value">{`${this.formatTime(date)} ${this.formatDate(date)}`}</div>
@@ -59,8 +60,8 @@ class Details extends Component {
                     </div>
                     <div className="details__main-container">
                         <div className="details__temp-group">
-                            <div className="details__temp">{temp}</div>
-                            <div className="details__temp-details">
+                            <div className="details__temp rotate-in">{temp}</div>
+                            <div className="details__temp-details rotate-in">
                                 <div className="details__label-temp ">Feels like</div>
                                 <div className="details__value temp">{feels_like}</div>
                                 <div className="details__label-temp">Min</div>
@@ -69,7 +70,7 @@ class Details extends Component {
                                 <div className="details__value temp">{temp_max}</div>
                             </div>
                         </div>
-                        <div className="details__weather-group">
+                        <div className="details__weather-group slide-right">
                             <img
                                 className="details__weather-img"
                                 src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="" />
@@ -78,7 +79,7 @@ class Details extends Component {
                     </div>
                     <div className="bottom__columns">
                         <div className="bottom__left">
-                            <div className="bottom__col">
+                            <div className="bottom__col slide-left">
                                 <div className="details__label">Cloudness</div>
                                 <div className="details__value">{`${clouds} %`}</div>
                                 <div className="details__label">Humidity</div>
@@ -97,7 +98,7 @@ class Details extends Component {
                             </div>
                         </div>
                         <div className="bottom__right">
-                            <div className="bottom__col">
+                            <div className="bottom__col slide-right">
                                 <div className="details__label">Sunrise time</div>
                                 <div className="details__value">{this.formatTime(sunrise)}</div>
                                 <div className="details__label">Sunset time</div>
@@ -113,4 +114,4 @@ class Details extends Component {
 
 const { getDetailWeather } = new WeatherService();
 
-export default WithData(Details, getDetailWeather);
+export default WithData(Animated(Details), getDetailWeather);

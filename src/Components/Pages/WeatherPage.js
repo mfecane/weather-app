@@ -1,29 +1,26 @@
 import React from 'react'
 import { withRouter } from "react-router-dom";
 
-import { store } from '../Redux';
 import CurrentWeather from "../CurrentWeather";
 import Forecast from "../Forecast";
 import Hourly from "../Hourly";
-import { bindActionCreators } from 'redux';
-import * as actions from '../Actions';
 
-const { dispatch } = store;
-
-const { setTheme } = bindActionCreators(actions, dispatch);
-
+import './Pages.scss';
 
 const WeatherPage = withRouter(({ match }) => {
     let { id } = match.params;
     if (!id) {
         id = 'Moscow';
     }
-    const { theme } = store.getState();
     return (
         <div className="app">
-            <div className={`app__top-container ${theme}`}>
-                <CurrentWeather param={{ city: id }} setTheme={setTheme} />
-                <Hourly param={{ city: id }} theme={theme} />
+            <div className='app__top-container'>
+                <div className="app-top__current-wrapper">
+                    <CurrentWeather param={{ city: id }} />
+                </div>
+                <div className="app-top__hourly-wrapper">
+                    <Hourly param={{ city: id }} />
+                </div>
             </div>
             <div className="app__bottom-container">
                 <Forecast param={{ city: id }} />

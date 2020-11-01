@@ -12,9 +12,8 @@ const Animated = (WrappedComponent) => {
 
         render() {
             const { didMount } = this.state
-            console.log(this.state);
             return (
-                <div className={`fade-in ${didMount && 'visible'}`}>
+                <div className={`_animate ${didMount && '_active'}`}>
                     <WrappedComponent {...this.props} />
                 </div>
             );

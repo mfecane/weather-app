@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import WeatherService from '../../Services/OWMService';
 import './Forecast.scss'
 import { WithData } from '../HOC'
+import Animated from '../HOC/Animated';
 
 class Forecast extends Component {
 
@@ -45,7 +46,7 @@ class Forecast extends Component {
                     {data.map(({ date, temp, icon }, index) => {
                         let { weekday, day } = this.formatDate(date);
                         weekday = (index === 0) ? 'Today' : weekday;
-                        return <Element key={date} weekday={weekday} day={day} temp={temp} icon={icon} />;
+                        return <Element key={date} weekday={weekday} day={day} temp={temp} icon={icon} index={index} />;
                     })}
                 </React.Fragment>
             </div>
@@ -53,9 +54,13 @@ class Forecast extends Component {
     }
 };
 
-const Element = ({ day, weekday, temp, icon }) => {
+const Element = ({ day, weekday, temp, icon, index }) => {
 
-    return <div className="forecast-item__container">
+    let style = {
+        transitionDelay: `${index * 0.1}s`
+    };
+
+    return <div className="forecast-item__container rotate-in" style={style}>
         <div className="forecast-item__date">
             {weekday}
         </div>
@@ -71,4 +76,4 @@ const Element = ({ day, weekday, temp, icon }) => {
 
 const { getForecastWeather } = new WeatherService();
 
-export default WithData(Forecast, getForecastWeather);
+export default WithData(Animated(Forecast), getForecastWeather);

@@ -5,8 +5,6 @@ import { ErrorBoundary } from '../Error';
 
 import { WeatherPage, CitiesPage, DetailsPage } from '../Pages';
 
-import './App.scss';
-
 export default class App extends Component {
 
   componentDidUpdate = () => {

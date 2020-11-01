@@ -24,7 +24,7 @@ export default class WeatherApiService {
             ls.set(storage, data, dayMs);
         }
         // console.log(storage + '_dump', data);
-        await sleep(500);
+        await sleep(1000);
         return data;
     }
 
@@ -38,8 +38,8 @@ export default class WeatherApiService {
         return this._transformForecastWeather(data);
     };
 
-    getHourlyWeather = async ({city}) => {
-        const data = await this.getResource(`forecast.json?key=${this._apiKey}&q=${city}&days=3`, 'hourly_weather_weatherapi_'+city)
+    getHourlyWeather = async ({ city }) => {
+        const data = await this.getResource(`forecast.json?key=${this._apiKey}&q=${city}&days=3`, 'hourly_weather_weatherapi_' + city)
         return this._transformHourlytWeather(data);
     }
 
@@ -77,7 +77,7 @@ export default class WeatherApiService {
     _transformHourlytWeather = ({ forecast: { forecastday }, current: { last_updated_epoch } }) => {
         const arr = [];
         forecastday.forEach(({ hour }) => {
-            hour.forEach(({ time_epoch,time, temp_c, chance_of_rain }) => {
+            hour.forEach(({ time_epoch, time, temp_c, chance_of_rain }) => {
                 if (arr.length >= 24) {
                     return;
                 }

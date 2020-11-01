@@ -10,6 +10,7 @@ function map(x, in_min, in_max, out_min, out_max) {
 }
 
 class Hourly extends Component {
+
     formatDate(date) {
         const d = new Date(date * 1000);
         return d.getHours() + 'h';
@@ -39,7 +40,8 @@ class Hourly extends Component {
                                         time={dateValue}
                                         rainChance={rainChance}
                                         height={height}
-                                        theme={theme} />
+                                        theme={theme}
+                                        index={index} />
                                 );
                             })}
                         </div>
@@ -50,28 +52,31 @@ class Hourly extends Component {
     }
 };
 
-const Element = ({ temp, time, height, rainChance, theme }) => {
+const Element = ({ temp, time, height, rainChance, index }) => {
+
     const style = {
-        height: `${height}px`
+        height: `${height}px`,
+        transitionDelay: `${index * 0.05}s`
     };
+
     let rain = '';
     if (Number(rainChance) !== 0) {
         rain = (
-            <div className="hourly__rain">
+            <div className="hourly-element__rain">
                 <img src={`https://openweathermap.org/img/wn/10d@2x.png`} alt="" />
-                <span className="hourly__rain-percent">{`${rainChance}%`}</span>
+                <span>{`${rainChance}%`}</span>
             </div>
         );
     }
 
     return (
         <div className="hourly__element-container">
-            <div className={`hourly__element ${theme}`} style={style}>
-                <div className="hourly__element-tempgroup">
-                    <div className="hourly__temp">{temp}</div>
-                    {rain}
+            <div className='hourly-element' style={style}>
+                <div className="hourly-element__temp">{temp}</div>
+                {rain}
+                <div className="hourly-element__time">
+                    <span>{time}</span>
                 </div>
-                <div className="hourly__time">{time}</div>
             </div>
         </div>
     );
@@ -79,4 +84,4 @@ const Element = ({ temp, time, height, rainChance, theme }) => {
 
 const { getHourlyWeather } = new WeatherService();
 
-export default Animated(WithData(Hourly, getHourlyWeather));
+export default WithData(Animated(Hourly), getHourlyWeather);

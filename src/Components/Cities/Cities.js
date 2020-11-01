@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Animated from '../HOC/Animated';
 import './Cities.scss';
 
-export default class Cities extends Component {
+class Cities extends Component {
 
     state = {
         cities: [
@@ -31,8 +32,8 @@ export default class Cities extends Component {
     render() {
         const { cities } = this.state;
 
-        const elements = cities.map(({ name }) => (
-            <Element key={name} name={name} to={`/city/${name}`} />
+        const elements = cities.map(({ name }, index) => (
+            <Element key={name} name={name} to={`/city/${name}`} index={index} />
         ));
 
         return (
@@ -45,13 +46,23 @@ export default class Cities extends Component {
     }
 }
 
-const Element = ({ name }) => (
-    <React.Fragment>
-        <h2 className="cities__name">
-            <Link to={`/city/${name}`}>{name}</Link>
-        </h2>
-        <div className="cities__temp">
-            15
-        </div>
-    </React.Fragment>
-);
+const Element = ({ name, index }) => {
+
+    const style = {
+        transitionDelay: `${index * 0.05}s`
+    };
+
+
+    console.log(index);
+
+    return (
+        <React.Fragment>
+            <h2 className="cities__name slide-left" style={style}>
+                <Link to={`/city/${name}`}>{name}</Link>
+            </h2>
+        </React.Fragment>
+    );
+};
+
+
+export default Animated(Cities);

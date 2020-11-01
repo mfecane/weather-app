@@ -24,7 +24,7 @@ export default class OWMService {
             ls.set(storage, data, dayMs);
         }
         //console.log(storage + '_dump', data);
-        await sleep(500);
+        await sleep(1000);
         return data;
     }
 
