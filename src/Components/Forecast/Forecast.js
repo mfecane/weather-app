@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import WeatherService from '../../Services/OWMService';
 import './Forecast.scss'
-import { WithData } from '../HOC'
+import { WithData, WithOWMService } from '../HOC'
 import Animated from '../HOC/Animated';
+import { forecastRequest, forecastLoaded, forecastError } from '../Actions'
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 class Forecast extends Component {
 
@@ -74,6 +76,19 @@ const Element = ({ day, weekday, temp, icon, index }) => {
     </div>;
 }
 
-const { getForecastWeather } = new WeatherService();
+const mapStateToProps = () => ({ forecast }) => (forecast);
 
-export default WithData(Animated(Forecast), getForecastWeather);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dataRequest: () => dispatch(forecastRequest()),
+        dataLoaded: (data) => dispatch(forecastLoaded(data)),
+        dataError: () => dispatch(forecastError()),
+    };
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithOWMService(),
+    WithData('getForecastWeather'), // use function like map
+    Animated()
+)(Forecast);

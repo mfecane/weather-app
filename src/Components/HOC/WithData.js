@@ -1,47 +1,28 @@
 import React, { Component } from 'react';
 import Spinner from '../Spinner';
 import { ErrorBoundary, ErrorIndicator } from '../Error';
-import Animated from './Animated';
 
-const withData = (View, getData) => {
+const withData = (methodName) => (Wrapped) => {
     return class extends Component {
 
-        state = {
-            data: null,
-            loading: true,
-            error: false
-        };
-
         componentDidMount() {
-            this.update();
-        }
-
-        update() {
-            this.setState({
-                loading: true,
-                error: false
-            });
 
             const param = this.props.param;
+            const { dataRequest, dataLoaded, dataError } = this.props;
+            dataRequest();
 
-            getData(param)
+            this.props.service[methodName](param)
                 .then((data) => {
-                    this.setState({
-                        data,
-                        loading: false
-                    });
+                    dataLoaded(data);
                 })
                 .catch(() => {
-                    this.setState({
-                        error: true,
-                        loading: false
-                    });
+                    dataError();
                 });
         }
 
-
         render() {
-            const { data, loading, error } = this.state;
+
+            const { data, loading, error } = this.props;
 
             if (loading) {
                 return <Spinner />;
@@ -53,7 +34,7 @@ const withData = (View, getData) => {
 
             return (
                 <ErrorBoundary>
-                    <View {...this.props} data={data} />
+                    <Wrapped {...this.props} data={data} />
                 </ErrorBoundary>
             );
         }

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './Hourly.scss';
-import WeatherService from '../../Services/WeatherApiService'
 import ScrollContainer from 'react-indiana-drag-scroll'
-import { WithData } from '../HOC';
+import { WithData, WithWeatherApiService } from '../HOC';
 import Animated from '../HOC/Animated';
+import { hourlyRequest, hourlyLoaded, hourlyError } from '../Actions'
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 function map(x, in_min, in_max, out_min, out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -17,6 +19,7 @@ class Hourly extends Component {
     }
 
     render() {
+
         const { theme, data } = this.props;
 
         let min = 0, max = 0;
@@ -82,6 +85,19 @@ const Element = ({ temp, time, height, rainChance, index }) => {
     );
 };
 
-const { getHourlyWeather } = new WeatherService();
+const mapStateToProps = () => ({ hourly }) => (hourly);
 
-export default WithData(Animated(Hourly), getHourlyWeather);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dataRequest: () => dispatch(hourlyRequest()),
+        dataLoaded: (data) => dispatch(hourlyLoaded(data)),
+        dataError: () => dispatch(hourlyError()),
+    };
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithWeatherApiService(),
+    WithData('getHourlyWeather'), // use function like map
+    Animated()
+)(Hourly);

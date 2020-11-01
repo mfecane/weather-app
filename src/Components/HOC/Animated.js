@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const Animated = (WrappedComponent) => {
+const Animated = () => (Wrapped) => {
     return class extends Component {
         state = { didMount: false }
 
@@ -14,7 +14,7 @@ const Animated = (WrappedComponent) => {
             const { didMount } = this.state
             return (
                 <div className={`_animate ${didMount && '_active'}`}>
-                    <WrappedComponent {...this.props} />
+                    <Wrapped {...this.props} />
                 </div>
             );
         }

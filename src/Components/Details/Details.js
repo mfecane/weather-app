@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import WithData from '../HOC/WithData';
-import WeatherService from '../../Services/OWMService';
 import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import WithOWMService from '../HOC/WithOWMService';
+import Animated from '../HOC/Animated';
+import { connect } from 'react-redux';
+import { detailsRequest, detailsLoaded, detailsError } from '../Actions'
 
 import './Details.scss';
-import Animated from '../HOC/Animated';
 
 class Details extends Component {
 
@@ -112,6 +115,19 @@ class Details extends Component {
     }
 }
 
-const { getDetailWeather } = new WeatherService();
+const mapStateToProps = () => ({ details }) => (details);
 
-export default WithData(Animated(Details), getDetailWeather);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dataRequest: () => dispatch(detailsRequest()),
+        dataLoaded: (data) => dispatch(detailsLoaded(data)),
+        dataError: () => dispatch(detailsError())
+    };
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithOWMService(),
+    WithData('getDetailWeather'), // use function like map
+    Animated()
+)(Details);

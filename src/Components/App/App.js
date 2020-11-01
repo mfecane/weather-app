@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { ErrorBoundary } from '../Error';
-
 import { WeatherPage, CitiesPage, DetailsPage } from '../Pages';
 
 export default class App extends Component {
@@ -23,11 +21,10 @@ export default class App extends Component {
         document.documentElement.className = 'warmTheme';
         break;
     }
-    console.log(document.documentElement.className);
   }
 
 
-  render() {
+  render() {// TODO: change basename to weather-app
     return (
       <ErrorBoundary>
         <BrowserRouter basename="/weather-app">

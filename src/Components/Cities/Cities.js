@@ -1,49 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import Animated from '../HOC/Animated';
 import './Cities.scss';
 
-class Cities extends Component {
+const Cities = () => {
 
-    state = {
-        cities: [
-            { name: 'Moscow', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Saint Petersburg', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Novosibirsk', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Yekaterinburg', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Nizhny Novgorod', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Kazan', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Chelyabinsk', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Omsk', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Samara', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Rostov-on-Don', temp: 5, weather: 'Rain', logo: 'logo' },
-            { name: 'Miami', temp: 5, weather: 'Rain', logo: 'logo' }
-        ],
-        loading: false,
-        error: false
-    };
+    const cities = [
+        { name: 'Moscow', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Saint Petersburg', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Novosibirsk', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Yekaterinburg', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Nizhny Novgorod', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Kazan', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Chelyabinsk', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Omsk', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Samara', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Rostov-on-Don', temp: 5, weather: 'Rain', logo: 'logo' },
+        { name: 'Miami', temp: 5, weather: 'Rain', logo: 'logo' }
+    ];
 
-    componentDidMount() {
-        this.setState({
-            loading: true
-        });
-    }
+    const elements = cities.map(({ name }, index) => (
+        <Element key={name} name={name} to={`/city/${name}`} index={index} />
+    ));
 
-    render() {
-        const { cities } = this.state;
-
-        const elements = cities.map(({ name }, index) => (
-            <Element key={name} name={name} to={`/city/${name}`} index={index} />
-        ));
-
-        return (
-            <div className="cities__container">
-                <div className="cities__grid">
-                    {elements}
-                </div>
+    return (
+        <div className="cities__container">
+            <div className="cities__grid">
+                {elements}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const Element = ({ name, index }) => {
@@ -51,9 +37,6 @@ const Element = ({ name, index }) => {
     const style = {
         transitionDelay: `${index * 0.05}s`
     };
-
-
-    console.log(index);
 
     return (
         <React.Fragment>
@@ -65,4 +48,4 @@ const Element = ({ name, index }) => {
 };
 
 
-export default Animated(Cities);
+export default Animated()(Cities);

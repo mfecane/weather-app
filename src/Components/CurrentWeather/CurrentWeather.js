@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import WeatherService from '../../Services/OWMService';
 import './CurrentWeather.scss';
 import { Link } from 'react-router-dom';
 import { WithData } from '../HOC';
 import { connect } from 'react-redux';
-import * as actions from '../Actions'
+import { currentWeatherRequest, currentWeatherLoaded, currentWeatherError, setTheme } from '../Actions'
 import Animated from '../HOC/Animated';
-
+import { compose } from 'redux';
+import WithOWMService from '../HOC/WithOWMService';
 
 class CurrentWeather extends Component {
 
@@ -31,7 +31,7 @@ class CurrentWeather extends Component {
     render() {
 
         const {
-            date, name, temp, desc, icon, high,
+            date, temp, desc, icon, high,
             low, wind, humidity
         } = this.props.data;
 
@@ -89,6 +89,21 @@ class CurrentWeather extends Component {
     }
 };
 
-const { getCurrentWeather } = new WeatherService();
 
-export default connect(null, actions)(WithData(Animated(CurrentWeather), getCurrentWeather));
+const mapStateToProps = () => ({ current }) => (current);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dataRequest: () => dispatch(currentWeatherRequest()),
+        dataLoaded: (data) => dispatch(currentWeatherLoaded(data)),
+        dataError: () => dispatch(currentWeatherError()),
+        setTheme: (theme) => dispatch(setTheme(theme)),
+    };
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithOWMService(),
+    WithData('getCurrentWeather'), // use function like map
+    Animated()
+)(CurrentWeather);
