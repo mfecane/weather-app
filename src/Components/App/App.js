@@ -27,7 +27,7 @@ export default class App extends Component {
   render() {// TODO: change basename to weather-app
     return (
       <ErrorBoundary>
-        <BrowserRouter basename="/weather-app">
+        <BrowserRouter basename="/weather-app/">
           <Route path="/" exact component={WeatherPage} />
           <Route path="/city/:id" component={WeatherPage} />
           <Route path="/cities" component={CitiesPage} />
